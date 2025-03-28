@@ -1,0 +1,43 @@
+[package]
+name = "enid"
+version = "0.1.0"
+authors = ["Jamie Mills <jamie@jaehl.net>"]
+edition = "2021"
+rust-version = "1.83.0"
+description = "A library to parse Encrypted Numeric Identifiers"
+documentation = "https://docs.rs/enid"
+readme = "README.md"
+repository = "https://github.com/jaehl/enid"
+license = "MIT"
+keywords = ["id", "identifier", "uid"]
+categories = [
+    "data-structures",
+    "no-std",
+    "no-std::no-alloc",
+    "parser-implementations",
+]
+
+[package.metadata.docs.rs]
+all-features = true
+
+[features]
+arbitrary = ["dep:arbitrary"]
+borsh = ["dep:borsh"]
+bytemuck = ["dep:bytemuck"]
+serde = ["dep:serde"]
+slog = ["dep:slog"]
+
+[dependencies]
+aes = { version = "0.8.4", default-features = false, optional = true }
+arbitrary = { version = "1.4", default-features = false, optional = true }
+borsh = { version = "1.5", default-features = false, optional = true }
+bytemuck = { version = "1.21", default-features = false, optional = true }
+serde = { version = "1.0", default-features = false, optional = true }
+slog = { version = "2.7", default-features = false, optional = true }
+
+[lints.rust]
+missing_debug_implementations = "warn"
+missing_docs = "warn"
+trivial_casts = "warn"
+trivial_numeric_casts = "warn"
+unreachable_pub = "warn"
