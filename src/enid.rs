@@ -7,7 +7,7 @@ use core::str::{self, FromStr};
 ///
 /// This error is used as the error type for the [`FromStr`] implementation for
 /// [`Enid40`], [`Enid80`], and [`Enid`].
-#[derive(Debug, Copy, Clone, PartialEq, Eq)]
+#[derive(Debug, Copy, Clone, Default, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub struct EnidParseError;
 
 impl Display for EnidParseError {
@@ -31,7 +31,7 @@ impl Error for EnidParseError {}
 /// # Ok(())
 /// # }
 /// ```
-#[derive(Copy, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
+#[derive(Copy, Clone, Default, PartialEq, Eq, Hash, PartialOrd, Ord)]
 #[repr(transparent)]
 pub struct Enid40([u8; 5]);
 
@@ -192,7 +192,7 @@ impl From<Enid40> for [u8; 5] {
 /// # Ok(())
 /// # }
 /// ```
-#[derive(Copy, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
+#[derive(Copy, Clone, Default, PartialEq, Eq, Hash, PartialOrd, Ord)]
 #[repr(transparent)]
 pub struct Enid80([u8; 10]);
 
