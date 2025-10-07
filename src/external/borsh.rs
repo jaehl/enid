@@ -6,7 +6,6 @@ use crate::enid::{Enid, Enid40, Enid80};
 use borsh::io::{Error, ErrorKind, Read, Result, Write};
 use borsh::{BorshDeserialize, BorshSerialize};
 
-#[cfg_attr(docsrs, doc(cfg(feature = "borsh")))]
 impl BorshSerialize for Enid40 {
     #[inline]
     fn serialize<W: Write>(&self, writer: &mut W) -> Result<()> {
@@ -14,7 +13,6 @@ impl BorshSerialize for Enid40 {
     }
 }
 
-#[cfg_attr(docsrs, doc(cfg(feature = "borsh")))]
 impl BorshSerialize for Enid80 {
     #[inline]
     fn serialize<W: Write>(&self, writer: &mut W) -> Result<()> {
@@ -22,7 +20,6 @@ impl BorshSerialize for Enid80 {
     }
 }
 
-#[cfg_attr(docsrs, doc(cfg(feature = "borsh")))]
 impl BorshSerialize for Enid {
     fn serialize<W: Write>(&self, writer: &mut W) -> Result<()> {
         match self {
@@ -38,7 +35,6 @@ impl BorshSerialize for Enid {
     }
 }
 
-#[cfg_attr(docsrs, doc(cfg(feature = "borsh")))]
 impl BorshDeserialize for Enid40 {
     #[inline]
     fn deserialize_reader<R: Read>(reader: &mut R) -> Result<Self> {
@@ -46,7 +42,6 @@ impl BorshDeserialize for Enid40 {
     }
 }
 
-#[cfg_attr(docsrs, doc(cfg(feature = "borsh")))]
 impl BorshDeserialize for Enid80 {
     #[inline]
     fn deserialize_reader<R: Read>(reader: &mut R) -> Result<Self> {
@@ -54,7 +49,6 @@ impl BorshDeserialize for Enid80 {
     }
 }
 
-#[cfg_attr(docsrs, doc(cfg(feature = "borsh")))]
 impl BorshDeserialize for Enid {
     fn deserialize_reader<R: Read>(reader: &mut R) -> Result<Self> {
         match u8::deserialize_reader(reader)? {

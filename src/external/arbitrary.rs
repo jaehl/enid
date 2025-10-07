@@ -3,7 +3,6 @@
 use crate::enid::{Enid, Enid40, Enid80};
 use arbitrary::{size_hint, Arbitrary, Result, Unstructured};
 
-#[cfg_attr(docsrs, doc(cfg(feature = "arbitrary")))]
 impl<'a> Arbitrary<'a> for Enid40 {
     fn arbitrary(u: &mut Unstructured<'a>) -> Result<Self> {
         u.arbitrary().map(Self::from_bytes)
@@ -15,7 +14,6 @@ impl<'a> Arbitrary<'a> for Enid40 {
     }
 }
 
-#[cfg_attr(docsrs, doc(cfg(feature = "arbitrary")))]
 impl<'a> Arbitrary<'a> for Enid80 {
     fn arbitrary(u: &mut Unstructured<'a>) -> Result<Self> {
         u.arbitrary().map(Self::from_bytes)
@@ -27,7 +25,6 @@ impl<'a> Arbitrary<'a> for Enid80 {
     }
 }
 
-#[cfg_attr(docsrs, doc(cfg(feature = "arbitrary")))]
 impl<'a> Arbitrary<'a> for Enid {
     fn arbitrary(u: &mut Unstructured<'a>) -> Result<Self> {
         if u.arbitrary()? {

@@ -5,7 +5,6 @@ use core::fmt::{self, Formatter};
 use serde::de::{self, Unexpected, Visitor};
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
-#[cfg_attr(docsrs, doc(cfg(feature = "serde")))]
 impl Serialize for Enid40 {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         if serializer.is_human_readable() {
@@ -16,7 +15,6 @@ impl Serialize for Enid40 {
     }
 }
 
-#[cfg_attr(docsrs, doc(cfg(feature = "serde")))]
 impl Serialize for Enid80 {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         if serializer.is_human_readable() {
@@ -27,7 +25,6 @@ impl Serialize for Enid80 {
     }
 }
 
-#[cfg_attr(docsrs, doc(cfg(feature = "serde")))]
 impl Serialize for Enid {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
@@ -37,7 +34,6 @@ impl Serialize for Enid {
     }
 }
 
-#[cfg_attr(docsrs, doc(cfg(feature = "serde")))]
 impl<'de> Deserialize<'de> for Enid40 {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
         if deserializer.is_human_readable() {
@@ -79,7 +75,6 @@ impl<'de> Deserialize<'de> for Enid40 {
     }
 }
 
-#[cfg_attr(docsrs, doc(cfg(feature = "serde")))]
 impl<'de> Deserialize<'de> for Enid80 {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
         if deserializer.is_human_readable() {
@@ -121,7 +116,6 @@ impl<'de> Deserialize<'de> for Enid80 {
     }
 }
 
-#[cfg_attr(docsrs, doc(cfg(feature = "serde")))]
 impl<'de> Deserialize<'de> for Enid {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
         if deserializer.is_human_readable() {
