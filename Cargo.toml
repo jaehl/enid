@@ -28,12 +28,11 @@ serde = ["dep:serde"]
 slog = ["dep:slog"]
 
 [dependencies]
-aes = { version = "0.8.4", default-features = false, optional = true }
-arbitrary = { version = "1.4", default-features = false, optional = true }
-borsh = { version = "1.5", default-features = false, optional = true }
-bytemuck = { version = "1.21", default-features = false, optional = true }
-serde = { version = "1.0", default-features = false, optional = true }
-slog = { version = "2.7", default-features = false, optional = true }
+arbitrary = { version = "1.0", default-features = false, optional = true }
+borsh = { version = "1.0", default-features = false, optional = true }
+bytemuck = { version = "1.3", default-features = false, optional = true }
+serde = { version = "1.0.16", default-features = false, optional = true }
+slog = { version = "2.5", default-features = false, optional = true }
 
 [lints.rust]
 missing_debug_implementations = "warn"
