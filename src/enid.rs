@@ -36,6 +36,16 @@ impl Error for EnidParseError {}
 pub struct Enid40([u8; 5]);
 
 impl Enid40 {
+    /// An ENID filled with zeros (`"00000000"`).
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # use enid::Enid40;
+    /// assert_eq!(Enid40::ZERO, Enid40::from_bytes([0; 5]));
+    /// ```
+    pub const ZERO: Self = Self([0; 5]);
+
     /// Creates an ENID from the given bytes.
     ///
     /// # Examples
@@ -135,6 +145,21 @@ impl Enid40 {
         self.0
     }
 
+    /// Returns `true` if the ENID is filled with zeros.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # use enid::enid40;
+    /// assert_eq!(enid40!("00000000").is_zero(), true);
+    /// assert_eq!(enid40!("m6sc7n75").is_zero(), false);
+    /// ```
+    #[must_use]
+    #[inline]
+    pub const fn is_zero(&self) -> bool {
+        matches!(self.0, [0, 0, 0, 0, 0])
+    }
+
     // TODO: use std::ascii::Char - https://github.com/rust-lang/rust/issues/110998
     pub(crate) const fn write_to_buffer<'a>(&self, buf: &'a mut [u8; 8]) -> &'a str {
         *buf = base32::encode(self.0);
@@ -197,6 +222,16 @@ impl From<Enid40> for [u8; 5] {
 pub struct Enid80([u8; 10]);
 
 impl Enid80 {
+    /// An ENID filled with zeros (`"00000000-00000000"`).
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # use enid::Enid80;
+    /// assert_eq!(Enid80::ZERO, Enid80::from_bytes([0; 10]));
+    /// ```
+    pub const ZERO: Self = Self([0; 10]);
+
     /// Creates an ENID from the given bytes.
     ///
     /// # Examples
@@ -307,6 +342,21 @@ impl Enid80 {
     #[inline]
     pub const fn into_bytes(self) -> [u8; 10] {
         self.0
+    }
+
+    /// Returns `true` if the ENID is filled with zeros.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # use enid::enid80;
+    /// assert_eq!(enid80!("00000000-00000000").is_zero(), true);
+    /// assert_eq!(enid80!("y3gx5gxm-mpb8ey39").is_zero(), false);
+    /// ```
+    #[must_use]
+    #[inline]
+    pub const fn is_zero(&self) -> bool {
+        matches!(self.0, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
     }
 
     // TODO: use std::ascii::Char - https://github.com/rust-lang/rust/issues/110998
@@ -552,6 +602,12 @@ impl From<[u8; 10]> for Enid {
 mod tests {
     use super::*;
     use std::string::ToString;
+
+    #[test]
+    fn default_zero() {
+        assert_eq!(Enid40::default(), Enid40::ZERO);
+        assert_eq!(Enid80::default(), Enid80::ZERO);
+    }
 
     #[test]
     fn enid40() {
