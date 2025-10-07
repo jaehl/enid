@@ -56,7 +56,7 @@ impl BorshDeserialize for Enid {
             1 => Enid80::deserialize_reader(reader).map(Self::Enid80),
             value => Err(Error::new(
                 ErrorKind::InvalidData,
-                alloc::format!("Invalid VarEnid80 variant: {value}"),
+                alloc::format!("Invalid Enid variant: {value}"),
             )),
         }
     }
