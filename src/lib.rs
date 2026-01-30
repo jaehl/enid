@@ -35,6 +35,8 @@
 //! * `borsh` - adds serialization and deserialization via [`borsh`].
 //! * `bytemuck` - adds [`Pod`](bytemuck::Pod) implementations for byte
 //!   manipulation.
+//! * `quickcheck` - adds [`Arbitrary`](quickcheck::Arbitrary) implementations
+//!   for fuzzing.
 //! * `serde` - adds serialization and deserialization via [`serde`].
 //! * `slog` - adds [`Value`](slog::Value) implementations for serialization.
 
