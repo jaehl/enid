@@ -1,7 +1,7 @@
 #![cfg(feature = "arbitrary")]
 
 use crate::enid::{Enid, Enid40, Enid80};
-use arbitrary::{size_hint, Arbitrary, Result, Unstructured};
+use arbitrary::{Arbitrary, Result, Unstructured, size_hint};
 
 impl<'a> Arbitrary<'a> for Enid40 {
     fn arbitrary(u: &mut Unstructured<'a>) -> Result<Self> {
