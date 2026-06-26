@@ -4,6 +4,9 @@ use crate::enid::{Enid, Enid40, Enid80};
 use core::mem::{self, MaybeUninit};
 use quickcheck::{Arbitrary, Gen};
 
+// TODO: Use `MaybeUninit::array_assume_init()` once it's stable.
+// https://github.com/rust-lang/rust/issues/96097
+
 impl Arbitrary for Enid40 {
     fn arbitrary(g: &mut Gen) -> Self {
         let mut bytes = [const { MaybeUninit::uninit() }; 5];

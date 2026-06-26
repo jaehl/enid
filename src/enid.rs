@@ -160,10 +160,12 @@ impl Enid40 {
         matches!(self.0, [0, 0, 0, 0, 0])
     }
 
-    // TODO: use std::ascii::Char - https://github.com/rust-lang/rust/issues/110998
+    // TODO: Use `ascii::Char` once it's stable.
+    // https://github.com/rust-lang/rust/issues/110998
     pub(crate) const fn write_to_buffer<'a>(&self, buf: &'a mut [u8; 8]) -> &'a str {
         *buf = base32::encode(self.0);
 
+        // SAFETY: Only ASCII characters are written to the buffer.
         unsafe { str::from_utf8_unchecked(buf) }
     }
 }
@@ -359,7 +361,8 @@ impl Enid80 {
         matches!(self.0, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
     }
 
-    // TODO: use std::ascii::Char - https://github.com/rust-lang/rust/issues/110998
+    // TODO: Use `ascii::Char` once it's stable.
+    // https://github.com/rust-lang/rust/issues/110998
     pub(crate) const fn write_to_buffer<'a>(&self, buf: &'a mut [u8; 17]) -> &'a str {
         *buf.first_chunk_mut().unwrap() = base32::encode(*self.0.first_chunk().unwrap());
 
@@ -367,6 +370,7 @@ impl Enid80 {
 
         *buf.last_chunk_mut().unwrap() = base32::encode(*self.0.last_chunk().unwrap());
 
+        // SAFETY: Only ASCII characters are written to the buffer.
         unsafe { str::from_utf8_unchecked(buf) }
     }
 }
