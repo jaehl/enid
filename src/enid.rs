@@ -1,4 +1,5 @@
 use crate::base32;
+use core::cmp::Ordering;
 use core::error::Error;
 use core::fmt::{self, Debug, Display, Formatter};
 use core::str::{self, FromStr};
@@ -423,7 +424,7 @@ impl From<Enid80> for [u8; 10] {
 /// assert_eq!(enid40.as_bytes(), &[0xa1, 0xb2, 0xc3, 0xd4, 0xe5]);
 /// assert_eq!(enid80.as_bytes(), &[0xf0, 0xe1, 0xd2, 0xc3, 0xb4, 0xa5, 0x96, 0x87, 0x78, 0x69]);
 /// ```
-#[derive(Copy, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
+#[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub enum Enid {
     /// A 40-bit ENID.
     Enid40(Enid40),
@@ -549,6 +550,19 @@ impl Enid {
     }
 }
 
+impl PartialOrd for Enid {
+    #[inline]
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for Enid {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.as_bytes().cmp(other.as_bytes())
+    }
+}
+
 impl Debug for Enid {
     #[inline]
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
@@ -605,6 +619,7 @@ impl From<[u8; 10]> for Enid {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::enid;
     use std::string::ToString;
 
     #[test]
@@ -745,5 +760,12 @@ mod tests {
         assert_invalid("00000000-000000l0");
         assert_invalid("00000000-00000o00");
         assert_invalid("00000000-0000u000");
+    }
+
+    #[test]
+    fn enid_order() {
+        assert!(enid!("00000000") < enid!("00000000-00000000"));
+        assert!(enid!("y3gx5gxm") < enid!("y3gx5gxm-00000000"));
+        assert!(enid!("y3gx5gxn") > enid!("y3gx5gxm-zzzzzzzz"));
     }
 }
